@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:CanteenApp.xcodeproj">
+      location = "self:/Users/dario/Documents/active-directory-b2c-ios-swift-native-msal/CanteenApp.xcodeproj">
    </FileRef>
 </Workspace>
