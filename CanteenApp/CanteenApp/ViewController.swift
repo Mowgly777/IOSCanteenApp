@@ -9,99 +9,136 @@ class ViewController: UIViewController, UITextFieldDelegate, URLSessionDelegate 
     let signInPolicy = ""
     let scopes: [String] = ["User.Read"]
 
-    let endpoint = "https://login.microsoftonline.com/%@/%@"
+    let endpoint = "%@"
     
     var accessToken = String()
     
-//    @IBOutlet weak var loggingText: UITextView!
-//
-//    @IBAction func authorizationButton(_ sender: UIButton) {
-//
-//        let authority = String(format: endpoint, tenantName, signInPolicy)
-//
-//        do {
-//            let application = try MSALPublicClientApplication.init(clientId: clientId, authority: authority)
-//
-//            application.acquireToken(forScopes: scopes) { (result, error) in
-//                    if  error == nil {
-//                        self.accessToken = (result?.accessToken)!
-//                        self.loggingText.text = "Access token is \(self.accessToken)"
-//                    } else {
-//                        self.loggingText.text = "Could not acquire token: \(error ?? "No error informarion" as! Error)"
-//                    }
-//            }
-//        } catch {
-//            self.loggingText.text = "Unable to create application \(error)"
-//        }
-//    }
+    @IBOutlet weak var loggingText: UITextView!
     
     private let loginContentView:UIView = {
         let view = UIView()
-        view.backgroundColor = .gray
+        
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    private let unameTxtField:UITextField = {
-        let txtField = UITextField()
-        txtField.borderStyle = .roundedRect
-        txtField.translatesAutoresizingMaskIntoConstraints = false
-        txtField.placeholder = "Username"
-        return txtField
-    }()
-    
-    private let pwordTxtField:UITextField = {
-        let txtField = UITextField()
-        txtField.borderStyle = .roundedRect
-        txtField.translatesAutoresizingMaskIntoConstraints = false
-        txtField.placeholder = "Password"
-        return txtField
-    }()
-    
     let btnLogin:UIButton = {
         let btn = UIButton(type:.system)
-        btn.backgroundColor = .black
+        btn.backgroundColor = .red
         btn.setTitle("Login", for: .normal)
         btn.tintColor = .white
         btn.layer.cornerRadius = 5
         btn.clipsToBounds = true
         btn.translatesAutoresizingMaskIntoConstraints = false
+        btn.addTarget(self, action: #selector(authorizationButton), for: .touchUpInside)
         return btn
+    }()
+    
+    let lblInvalid:UILabel = {
+        let lbl = UILabel()
+        lbl.text = "An error occured\nPlease try again"
+        lbl.textColor = .red
+        lbl.textAlignment = .center
+        lbl.translatesAutoresizingMaskIntoConstraints = false
+        lbl.numberOfLines = 0
+        return lbl
+    }()
+    
+    let imgLogo:UIImageView = {
+        let img = UIImageView()
+        img.image = UIImage(named: "Logo")
+        img.translatesAutoresizingMaskIntoConstraints = false
+        img.backgroundColor = .black
+
+        return img
+    }()
+    
+    let imgLogoContainer:UIView = {
+        let view = UIView()
+        view.backgroundColor = .black
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
     
     func setUpAutoLayout() {
         loginContentView.leftAnchor.constraint(equalTo:view.leftAnchor).isActive = true
         loginContentView.rightAnchor.constraint(equalTo:view.rightAnchor).isActive = true
-        loginContentView.heightAnchor.constraint(equalToConstant: view.frame.height/3).isActive = true
+        if #available(iOS 11.0, *) {
+            loginContentView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor).isActive = true
+        } else {
+            loginContentView.heightAnchor.constraint(equalToConstant: view.frame.height).isActive = true
+            
+        }
         loginContentView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         
-        unameTxtField.topAnchor.constraint(equalTo:loginContentView.topAnchor, constant:20).isActive = true
-        unameTxtField.leftAnchor.constraint(equalTo:loginContentView.leftAnchor, constant:20).isActive = true
-        unameTxtField.rightAnchor.constraint(equalTo:loginContentView.rightAnchor, constant:-20).isActive = true
-        unameTxtField.heightAnchor.constraint(equalToConstant:50).isActive = true
+        //Imediately redraw the screen- this is needed because the following constraints are dependant on this parent view to get values
+        loginContentView.layoutIfNeeded()
         
-        pwordTxtField.leftAnchor.constraint(equalTo:loginContentView.leftAnchor, constant:20).isActive = true
-        pwordTxtField.rightAnchor.constraint(equalTo:loginContentView.rightAnchor, constant:-20).isActive = true
-        pwordTxtField.topAnchor.constraint(equalTo:unameTxtField.bottomAnchor, constant:20).isActive = true
-        pwordTxtField.heightAnchor.constraint(equalToConstant:50).isActive = true
+        //Button login constraints
+        NSLayoutConstraint.activate([
+            btnLogin.centerXAnchor.constraint(equalTo: loginContentView.centerXAnchor),
+            btnLogin.centerYAnchor.constraint(equalTo: loginContentView.centerYAnchor, constant: loginContentView.frame.size.height/3),
+            btnLogin.widthAnchor.constraint(equalTo: loginContentView.widthAnchor, constant: -100),
+            btnLogin.heightAnchor.constraint(equalToConstant: 50),
+            ])
+    
         
-        btnLogin.topAnchor.constraint(equalTo:pwordTxtField.bottomAnchor, constant:20).isActive = true
-        btnLogin.leftAnchor.constraint(equalTo:loginContentView.leftAnchor, constant:20).isActive = true
-        btnLogin.rightAnchor.constraint(equalTo:loginContentView.rightAnchor, constant:-20).isActive = true
-        btnLogin.heightAnchor.constraint(equalToConstant:50).isActive = true
-
+        //Image logo container constraints
+        NSLayoutConstraint.activate([
+            imgLogoContainer.centerXAnchor.constraint(equalTo: loginContentView.centerXAnchor),
+            imgLogoContainer.topAnchor.constraint(equalTo: loginContentView.topAnchor),
+            imgLogoContainer.widthAnchor.constraint(equalTo: loginContentView.widthAnchor),
+            imgLogoContainer.heightAnchor.constraint(equalTo: imgLogo.heightAnchor),
+            ])
+        
+        //Image logo constraints
+        NSLayoutConstraint.activate([
+            imgLogo.centerXAnchor.constraint(equalTo: imgLogoContainer.centerXAnchor),
+            imgLogo.topAnchor.constraint(equalTo: imgLogoContainer.topAnchor),
+            ])
+        
+    }
+    
+    func showInvalidLabel(){
+        self.loginContentView.addSubview(self.lblInvalid)
+        self.lblInvalid.centerXAnchor.constraint(equalTo: self.loginContentView.centerXAnchor).isActive = true
+        self.lblInvalid.topAnchor.constraint(equalTo: self.btnLogin.bottomAnchor).isActive = true
+    }
+    
+    @IBAction func authorizationButton(_ sender: UIButton) {
+        
+        let authority = String(format: endpoint, tenantName, signInPolicy)
+        
+        do {
+            let application = try MSALPublicClientApplication.init(clientId: clientId, authority: authority)
+            
+            application.acquireToken(forScopes: scopes) { (result, error) in
+                if  error == nil {
+                    self.accessToken = (result?.accessToken)!
+                } else {
+                    self.showInvalidLabel()
+                }
+            }
+        } catch {
+            self.showInvalidLabel()
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        loginContentView.addSubview(unameTxtField)
-        loginContentView.addSubview(pwordTxtField)
+        //Add sub views to content view
+        imgLogoContainer.addSubview(imgLogo)
         loginContentView.addSubview(btnLogin)
+        loginContentView.addSubview(imgLogoContainer)
         
+        //Setup parent view
+        view.backgroundColor = .white
+        
+        //Add content view to parent view
         view.addSubview(loginContentView)
         
+        //Setup auto layout constraints
         setUpAutoLayout()
         
     }
