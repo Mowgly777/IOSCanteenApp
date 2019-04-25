@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MSALiOSB2C/ViewController.swift"
+            timestampString = "577173885.086504"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "108"
+            endingLineNumber = "108"
+            landmarkName = "authorizationButton(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;__C.MSALResult&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in MSALiOSB2C.ViewController.authorizationButton(__C.UIButton) -&gt; ()"
+                  moduleName = "MSALiOSB2C"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/dario/Documents/active-directory-b2c-ios-swift-native-msal/MSALiOSB2C/ViewController.swift"
+                  timestampString = "577109259.5120111"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "108"
+                  endingLineNumber = "108"
+                  offsetFromSymbolStart = "310">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;__C.MSALResult&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in MSALiOSB2C.ViewController.authorizationButton(__C.UIButton) -&gt; ()"
+                  moduleName = "MSALiOSB2C"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/dario/Documents/active-directory-b2c-ios-swift-native-msal/MSALiOSB2C/ViewController.swift"
+                  timestampString = "577109259.52246"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "108"
+                  endingLineNumber = "108"
+                  offsetFromSymbolStart = "3001">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MSALiOSB2C/ViewController.swift"
+            timestampString = "577173885.086568"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "93"
+            endingLineNumber = "93"
+            landmarkName = "authorizationButton(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CanteenApp/AppDelegate.swift"
+            timestampString = "577803462.185933"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "7"
+            endingLineNumber = "7"
+            landmarkName = "AppDelegate"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CanteenApp.AppDelegate.__allocating_init() -&gt; CanteenApp.AppDelegate"
+                  moduleName = "CanteenApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/dario/Documents/Swift/IOSCanteenApp/CanteenApp/CanteenApp/AppDelegate.swift"
+                  timestampString = "577714197.249604"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "12">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CanteenApp.AppDelegate.init() -&gt; CanteenApp.AppDelegate"
+                  moduleName = "CanteenApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/dario/Documents/Swift/IOSCanteenApp/CanteenApp/CanteenApp/AppDelegate.swift"
+                  timestampString = "577714197.25148"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "9"
+                  endingLineNumber = "9"
+                  offsetFromSymbolStart = "20">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CanteenApp.AppDelegate.__deallocating_deinit"
+                  moduleName = "CanteenApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/dario/Documents/Swift/IOSCanteenApp/CanteenApp/CanteenApp/AppDelegate.swift"
+                  timestampString = "577714197.253374"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "main"
+                  moduleName = "CanteenApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/dario/Documents/Swift/IOSCanteenApp/CanteenApp/CanteenApp/AppDelegate.swift"
+                  timestampString = "577714197.2551121"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "7"
+                  endingLineNumber = "7"
+                  offsetFromSymbolStart = "12">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
