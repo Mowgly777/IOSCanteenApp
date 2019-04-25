@@ -2,7 +2,7 @@
 import UIKit
 import MSAL
 
-class ViewController: UIViewController, UITextFieldDelegate, URLSessionDelegate  {
+class LoginViewController: UIViewController, UITextFieldDelegate, URLSessionDelegate  {
     
     let tenantName = "cccbf502-6b91-40d6-be02-5ffa0eb711d6"
     let clientId = "0da586eb-d44e-4a7d-9f4a-8763631a2cc2"
@@ -46,16 +46,16 @@ class ViewController: UIViewController, UITextFieldDelegate, URLSessionDelegate 
     
     let imgLogo:UIImageView = {
         let img = UIImageView()
-        img.image = UIImage(named: "Logo")
+        img.image = UIImage(named: "Logo2")
         img.translatesAutoresizingMaskIntoConstraints = false
-        img.backgroundColor = .black
+        img.backgroundColor = UIColor(red: 0xc8, green: 0x00, blue: 0x00, alpha: 0x01)
 
         return img
     }()
     
     let imgLogoContainer:UIView = {
         let view = UIView()
-        view.backgroundColor = .black
+        view.backgroundColor = UIColor(red: 0xc8, green: 0x00, blue: 0x00, alpha: 0x01)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -95,6 +95,8 @@ class ViewController: UIViewController, UITextFieldDelegate, URLSessionDelegate 
         NSLayoutConstraint.activate([
             imgLogo.centerXAnchor.constraint(equalTo: imgLogoContainer.centerXAnchor),
             imgLogo.topAnchor.constraint(equalTo: imgLogoContainer.topAnchor),
+            imgLogo.heightAnchor.constraint(equalToConstant: 100),
+            imgLogo.widthAnchor.constraint(equalToConstant: 200),
             ])
         
     }
@@ -133,7 +135,7 @@ class ViewController: UIViewController, UITextFieldDelegate, URLSessionDelegate 
         loginContentView.addSubview(imgLogoContainer)
         
         //Setup parent view
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 1)
         
         //Add content view to parent view
         view.addSubview(loginContentView)
