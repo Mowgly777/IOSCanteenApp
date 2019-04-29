@@ -9,7 +9,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, URLSessionDele
     let signInPolicy = ""
     let scopes: [String] = ["User.Read"]
 
-    let endpoint = "%@"
+    let endpoint = "https://login.microsoftonline.com/%@/%@"
     
     var accessToken = String()
     
