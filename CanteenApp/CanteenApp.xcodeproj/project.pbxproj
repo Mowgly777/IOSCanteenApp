@@ -12,6 +12,7 @@
 		A32925B32264E34A006A7E91 /* MSAL.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A32925AF2264E32D006A7E91 /* MSAL.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A32F1FE222705EC40091C491 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A32F1FE122705EC40091C491 /* Assets.xcassets */; };
 		A3E728442276F3AB009F2D49 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3E728432276F3AB009F2D49 /* DashboardViewController.swift */; };
+		D6F0D49F22771B0F008E4D65 /* FoodlistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6F0D49E22771B0F008E4D65 /* FoodlistViewController.swift */; };
 		FB7630D11EB7EF8700D2A969 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7630D01EB7EF8700D2A969 /* AppDelegate.swift */; };
 		FB7630D31EB7EF8700D2A969 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7630D21EB7EF8700D2A969 /* LoginViewController.swift */; };
 		FB7630DB1EB7EF8700D2A969 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB7630D91EB7EF8700D2A969 /* LaunchScreen.storyboard */; };
@@ -36,6 +37,7 @@
 		A32925AF2264E32D006A7E91 /* MSAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MSAL.framework; path = Carthage/Build/iOS/MSAL.framework; sourceTree = SOURCE_ROOT; };
 		A32F1FE122705EC40091C491 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A3E728432276F3AB009F2D49 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
+		D6F0D49E22771B0F008E4D65 /* FoodlistViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodlistViewController.swift; sourceTree = "<group>"; };
 		FB2510571EBBE8030044F3F7 /* MSAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MSAL.framework; path = Carthage/Build/iOS/MSAL.framework; sourceTree = "<group>"; };
 		FB7368BE1EB94C8100FB407E /* CanteenApp.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = CanteenApp.xcodeproj; sourceTree = "<group>"; };
 		FB7630CD1EB7EF8700D2A969 /* CanteenApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CanteenApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -89,6 +91,7 @@
 				A32F1FE122705EC40091C491 /* Assets.xcassets */,
 				FB7631031EB7F15000D2A969 /* CanteenApp.entitlements */,
 				FB7630D01EB7EF8700D2A969 /* AppDelegate.swift */,
+				D6F0D49E22771B0F008E4D65 /* FoodlistViewController.swift */,
 				FB7630D21EB7EF8700D2A969 /* LoginViewController.swift */,
 				FB7630D91EB7EF8700D2A969 /* LaunchScreen.storyboard */,
 				FB7630DC1EB7EF8700D2A969 /* Info.plist */,
@@ -209,6 +212,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D6F0D49F22771B0F008E4D65 /* FoodlistViewController.swift in Sources */,
 				FB7630D31EB7EF8700D2A969 /* LoginViewController.swift in Sources */,
 				A3E728442276F3AB009F2D49 /* DashboardViewController.swift in Sources */,
 				FB7630D11EB7EF8700D2A969 /* AppDelegate.swift in Sources */,
