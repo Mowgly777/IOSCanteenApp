@@ -9,15 +9,12 @@ class LoginViewController: UIViewController, UITextFieldDelegate, URLSessionDele
     let signInPolicy = ""
     let scopes: [String] = ["User.Read"]
 
-    let endpoint = "%@"
+    let endpoint = "https://login.microsoftonline.com/%@/%@"
     
     var accessToken = String()
     
-    @IBOutlet weak var loggingText: UITextView!
-    
     private let loginContentView:UIView = {
         let view = UIView()
-        
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -117,6 +114,20 @@ class LoginViewController: UIViewController, UITextFieldDelegate, URLSessionDele
             application.acquireToken(forScopes: scopes) { (result, error) in
                 if  error == nil {
                     self.accessToken = (result?.accessToken)!
+                    
+                    let dashboardStoryboard = UIStoryboard(name: "LaunchScreen", bundle: Bundle.main)
+                    
+                    guard let dashboardNavigationVC = dashboardStoryboard.instantiateViewController(withIdentifier: "DashboardController") as? DashboardViewController else {
+                        return
+                    }
+                    
+                    if let dashboardVC = dashboardNavigationVC.topViewController as? DashboardViewController{
+                        dashboardVC.accessToken = self.accessToken
+                        dashboardVC.userEmail = result?.user.displayableId
+                    }
+                    
+                    self.present(dashboardNavigationVC, animated: true, completion: nil)
+                    
                 } else {
                     self.showInvalidLabel()
                 }
