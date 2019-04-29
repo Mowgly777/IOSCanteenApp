@@ -146,16 +146,56 @@ class DayView: UIView, UIPickerViewDataSource, UIPickerViewDelegate {
     }
 }
 
-class ViewController: UIViewController {
+class FoodlistViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let imgLogo:UIImageView = {
+            let img = UIImageView()
+            img.image = UIImage(named: "Logo2")
+            img.translatesAutoresizingMaskIntoConstraints = false
+            img.backgroundColor = UIColor(red: 0xc8, green: 0x00, blue: 0x00, alpha: 0x01)
+            
+            return img
+        }()
+        
+        let imgLogoContainer:UIView = {
+            let container = UIView()
+            //view.backgroundColor = UIColor(red: 0xc8, green: 0x00, blue: 0x00, alpha: 0x01)
+            container.backgroundColor = .red
+            container.translatesAutoresizingMaskIntoConstraints = false
+            return container
+        }()
+        
+        imgLogoContainer.addSubview(imgLogo)
+        view.addSubview(imgLogoContainer)
+        
+        // img container constraints
+        NSLayoutConstraint.activate([
+            imgLogoContainer.centerXAnchor.constraint(equalTo: view.layoutMarginsGuide.centerXAnchor),
+            imgLogoContainer.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
+            imgLogoContainer.widthAnchor.constraint(equalTo: view.widthAnchor),
+            //imgLogoContainer.heightAnchor.constraint(equalTo: view.heightAnchor),
+            imgLogoContainer.heightAnchor.constraint(equalToConstant: 100),
+            //imgLogoContainer.bottomAnchor.constraint(equalTo: scrollView.topAnchor),
+            ])
+        
+        // img constraints
+        NSLayoutConstraint.activate([
+            imgLogo.centerXAnchor.constraint(equalTo: imgLogoContainer.centerXAnchor),
+            imgLogo.topAnchor.constraint(equalTo: imgLogoContainer.topAnchor),
+            imgLogo.heightAnchor.constraint(equalToConstant: 100),
+            imgLogo.widthAnchor.constraint(equalToConstant: 200),
+        ])
+        
+        
         let scrollView = UIScrollView()
         view.addSubview(scrollView)
+        view.backgroundColor = UIColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 1)
         scrollView.delaysContentTouches = false
         
         scrollView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor).isActive = true
+        scrollView.topAnchor.constraint(equalTo: imgLogoContainer.bottomAnchor).isActive = true
         scrollView.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor).isActive = true
         scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
