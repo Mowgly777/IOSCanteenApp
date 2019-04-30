@@ -146,7 +146,10 @@ class DayView: UIView, UIPickerViewDataSource, UIPickerViewDelegate {
     }
 }
 
-class ViewController: UIViewController {
+class FoodlistViewController: UIViewController {
+    
+    var userEmail: String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

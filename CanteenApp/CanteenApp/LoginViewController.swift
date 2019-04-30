@@ -27,7 +27,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, URLSessionDele
         btn.layer.cornerRadius = 5
         btn.clipsToBounds = true
         btn.translatesAutoresizingMaskIntoConstraints = false
-        btn.addTarget(self, action: #selector(authorizationButton), for: .touchUpInside)
+        btn.addTarget(self, action: #selector(pass), for: .touchUpInside)
         return btn
     }()
     
@@ -117,7 +117,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, URLSessionDele
                     
                     let dashboardStoryboard = UIStoryboard(name: "LaunchScreen", bundle: Bundle.main)
                     
-                    guard let dashboardNavigationVC = dashboardStoryboard.instantiateViewController(withIdentifier: "DashboardController") as? DashboardViewController else {
+                    guard let dashboardNavigationVC = dashboardStoryboard.instantiateViewController(withIdentifier: "DashboardController") as? DashboardNavigationController else {
                         return
                     }
                     
@@ -135,6 +135,16 @@ class LoginViewController: UIViewController, UITextFieldDelegate, URLSessionDele
         } catch {
             self.showInvalidLabel()
         }
+    }
+    
+    @IBAction func pass(_ sender: UIButton) {
+        let dashboardStoryboard = UIStoryboard(name: "LaunchScreen", bundle: Bundle.main)
+        
+        guard let dashboardNavigationVC = dashboardStoryboard.instantiateViewController(withIdentifier: "DashboardController") as? DashboardViewController else {
+            return
+        }
+        
+        self.present(dashboardNavigationVC, animated: true, completion: nil)
     }
     
     override func viewDidLoad() {

@@ -28,10 +28,10 @@
             </objects>
             <point key="canvasLocation" x="-2423" y="230"/>
         </scene>
-        <!--View Controller-->
+        <!--Dashboard View Controller-->
         <scene sceneID="cMn-PB-Iml">
             <objects>
-                <viewController storyboardIdentifier="Dashboard" id="X3s-9f-rUS" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Dashboard" id="X3s-9f-rUS" customClass="DashboardViewController" customModule="CanteenApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="BK3-Xj-daD"/>
                         <viewControllerLayoutGuide type="bottom" id="XBN-aO-7H9"/>
@@ -45,7 +45,26 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QcO-Po-xBy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="234.78260869565219" y="229.6875"/>
+            <point key="canvasLocation" x="325" y="-11"/>
+        </scene>
+        <!--Foodlist View Controller-->
+        <scene sceneID="1Eh-o0-8Yv">
+            <objects>
+                <viewController storyboardIdentifier="FoodlistViewController" id="waX-QM-DlV" customClass="FoodlistViewController" customModule="CanteenApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="iwI-5G-lzm"/>
+                        <viewControllerLayoutGuide type="bottom" id="mPV-rv-F0d"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="59h-76-PzJ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="YUG-jB-Ze2"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PrP-BI-bZW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1234.7826086956522" y="786.83035714285711"/>
         </scene>
         <!--Dashboard View Controller-->
         <scene sceneID="if7-5M-znR">

@@ -9,10 +9,34 @@
 import Foundation
 import UIKit
 
-class DashboardViewController: UINavigationController{
+class DashboardViewController: UIViewController{
     
     var accessToken: String?
     var userEmail: String?
+    
+    @IBAction func launchFoodList(_ sender: UIButton) {
+        
+
+        
+//        let foodlistVC = UIStoryboard.init(name: "LaunchScreen", bundle: Bundle.main).instantiateViewController(withIdentifier: "FoodlistViewController") as? FoodlistViewController
+//        print(foodlistVC)
+//        self.navigationController?.pushViewController(foodlistVC!, animated: true)
+        
+        let storyboard = UIStoryboard(name: "LaunchScreen", bundle: Bundle.main)
+        
+
+        guard let foodlistVC = storyboard.instantiateViewController(withIdentifier: "FoodlistViewController") as? FoodlistViewController else {
+            return
+        }
+        
+        self.parent!.navigationController!.pushViewController(foodlistVC, animated: true)
+//
+//        if let foodlistVC = foodlistNavigationVC.topViewController as? FoodlistViewController{
+//            foodlistVC.userEmail = userEmail
+//        }
+//
+//        self.present(foodlistNavigationVC, animated: true, completion: nil)
+    }
     
     private let dashboardContentView:UIView = {
         let view = UIView()
@@ -36,6 +60,7 @@ class DashboardViewController: UINavigationController{
         btn.tintColor = .white
         btn.backgroundColor = .red
         btn.translatesAutoresizingMaskIntoConstraints = false
+        btn.addTarget(self, action: #selector(launchFoodList), for: .touchUpInside)
         return btn
     }()
     
