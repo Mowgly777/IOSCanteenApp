@@ -150,6 +150,14 @@ class FoodlistViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let containerView = UIView()
+        view.addSubview(containerView)
+        containerView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor).isActive = true
+        containerView.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor).isActive = true
+        containerView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        containerView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        containerView.backgroundColor = .green
+        
         let imgLogo:UIImageView = {
             let img = UIImageView()
             img.image = UIImage(named: "Logo2")
@@ -204,6 +212,7 @@ class FoodlistViewController: UIViewController {
         scrollView.addSubview(stackView)
         stackView.axis = .vertical
         stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.spacing = 50
         
         let mondayView: DayView = DayView(label: "Monday")
         let tuesdayView: DayView = DayView(label: "Tuesday")
@@ -233,5 +242,20 @@ class FoodlistViewController: UIViewController {
         wednesdayView.heightAnchor.constraint(equalToConstant: 200).isActive = true
         thursdayView.heightAnchor.constraint(equalToConstant: 200).isActive = true
         fridayView.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        
+        let orderButton = UIButton()
+        orderButton.backgroundColor = .red
+        orderButton.translatesAutoresizingMaskIntoConstraints = false
+        orderButton.layer.cornerRadius = 15
+        orderButton.setTitle("Order", for: .normal)
+        scrollView.addSubview(orderButton)
+        
+        NSLayoutConstraint.activate([
+            orderButton.centerXAnchor.constraint(equalTo: view.layoutMarginsGuide.centerXAnchor),
+            //orderButton.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
+            orderButton.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -20),
+            orderButton.heightAnchor.constraint(equalToConstant: 40),
+            orderButton.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor),
+        ])
     }
 }
