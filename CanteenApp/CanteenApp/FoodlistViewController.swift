@@ -8,31 +8,75 @@
 
 import UIKit
 
+class FoodItem {
+    let foodName: String
+    let foodDescription: String
+    let foodImageString: String
+    
+    init(foodName: String, foodDescription: String, foodImageString: String) {
+        self.foodName = foodName
+        self.foodDescription = foodDescription
+        self.foodImageString = foodImageString
+    }
+}
+
+// This creates the data source
+func create_food_list() -> [FoodItem] {
+    var foodItem: [FoodItem] = []
+    
+    for i in (0..<5) {
+        if (i == 4) {
+            foodItem.append(FoodItem(foodName: "Nothing to order", foodDescription: "You're eating air!", foodImageString: "blocked"))
+        } else {
+            foodItem.append(FoodItem(foodName: "Hamburger", foodDescription: "It is a hamburger", foodImageString: "hamburger"))
+        }
+    }
+    
+    return foodItem
+}
+
 class DayView: UIView, UIPickerViewDataSource, UIPickerViewDelegate {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        self.foodPickerView = UIPickerView()
         
         initSubviews()
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        self.foodPickerView = UIPickerView()
         initSubviews()
     }
     
     var dayLabel: String?
     init(label: String) {
         super.init(frame: .zero)
+        self.foodPickerView = UIPickerView()
         self.dayLabel = label
         initSubviews()
     }
     
+    var foodItems: [FoodItem]?
+    init(label: String, foodItems: [FoodItem]) {
+        super.init(frame: .zero)
+        self.foodPickerView = UIPickerView()
+        self.dayLabel = label
+        self.foodItems = foodItems
+        initSubviews()
+    }
+    
+    var foodPickerView: UIPickerView?
     
     func initSubviews() {
         self.translatesAutoresizingMaskIntoConstraints = false
         
-        let foodPickerView: UIPickerView = {
-            let pickerView = UIPickerView()
+        let innerFoodPickerView: UIPickerView = {
+            var pickerView = UIPickerView()
+            
+            if (self.foodPickerView != nil) {
+                pickerView = foodPickerView!
+            }
             
             pickerView.dataSource = self
             pickerView.delegate = self
@@ -54,18 +98,17 @@ class DayView: UIView, UIPickerViewDataSource, UIPickerViewDelegate {
         }()
         
         addSubview(dayLabel)
-        addSubview(foodPickerView)
+        addSubview(innerFoodPickerView)
         
         dayLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
     }
     
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
-    {
-        // use the row to get the selected row from the picker view
-        // using the row extract the value from your datasource (array[row])
-        print("selected \(row)")
-        
-    }
+//    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
+//    {
+          //use the row to get the selected row from the picker view
+          //using the row extract the value from your datasource (array[row])
+//        print("selected \(row)")
+//    }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -87,7 +130,8 @@ class DayView: UIView, UIPickerViewDataSource, UIPickerViewDelegate {
         let foodLabel: UILabel = {
             let labelView = UILabel()
             
-            labelView.text = "Hamburger"
+            labelView.text = foodItems?[row].foodName
+            //labelView.text = "Hamburger"
             labelView.translatesAutoresizingMaskIntoConstraints = false
             
             return labelView
@@ -96,7 +140,8 @@ class DayView: UIView, UIPickerViewDataSource, UIPickerViewDelegate {
         let foodDescriptionLabel: UILabel = {
             let labelView = UILabel()
             
-            labelView.text = "It's a burger."
+            //labelView.text = "It's a burger."
+            labelView.text = foodItems?[row].foodDescription
             labelView.font = labelView.font.withSize(12)
             labelView.translatesAutoresizingMaskIntoConstraints = false
             
@@ -105,7 +150,8 @@ class DayView: UIView, UIPickerViewDataSource, UIPickerViewDelegate {
         
         let foodImage: UIImageView = {
             let imageView = UIImageView()
-            let image = UIImage(named: "hamburger")
+            //let image = UIImage(named: "hamburger")
+            let image = UIImage(named: foodItems?[row].foodImageString ?? "hamburger")
             
             imageView.image = image
             imageView.clipsToBounds = true
@@ -147,6 +193,26 @@ class DayView: UIView, UIPickerViewDataSource, UIPickerViewDelegate {
 }
 
 class FoodlistViewController: UIViewController {
+    var mondayView: DayView?
+    var tuesdayView: DayView?
+    var wednesdayView: DayView?
+    var thursdayView: DayView?
+    var fridayView: DayView?
+    
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        
+        mondayView = DayView(label: "Monday", foodItems: create_food_list())
+        tuesdayView = DayView(label: "Tuesday", foodItems: create_food_list())
+        wednesdayView = DayView(label: "Wednesday", foodItems: create_food_list())
+        thursdayView = DayView(label: "Thursday", foodItems: create_food_list())
+        fridayView = DayView(label: "Friday", foodItems: create_food_list())
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -169,7 +235,6 @@ class FoodlistViewController: UIViewController {
         
         let imgLogoContainer:UIView = {
             let container = UIView()
-            //view.backgroundColor = UIColor(red: 0xc8, green: 0x00, blue: 0x00, alpha: 0x01)
             container.backgroundColor = .red
             container.translatesAutoresizingMaskIntoConstraints = false
             return container
@@ -183,9 +248,7 @@ class FoodlistViewController: UIViewController {
             imgLogoContainer.centerXAnchor.constraint(equalTo: view.layoutMarginsGuide.centerXAnchor),
             imgLogoContainer.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
             imgLogoContainer.widthAnchor.constraint(equalTo: view.widthAnchor),
-            //imgLogoContainer.heightAnchor.constraint(equalTo: view.heightAnchor),
             imgLogoContainer.heightAnchor.constraint(equalToConstant: 100),
-            //imgLogoContainer.bottomAnchor.constraint(equalTo: scrollView.topAnchor),
             ])
         
         // img constraints
@@ -214,48 +277,65 @@ class FoodlistViewController: UIViewController {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.spacing = 50
         
-        let mondayView: DayView = DayView(label: "Monday")
-        let tuesdayView: DayView = DayView(label: "Tuesday")
-        let wednesdayView: DayView = DayView(label: "Wednesday")
-        let thursdayView: DayView = DayView(label: "Thursday")
-        let fridayView: DayView = DayView(label: "Friday")
+        mondayView = DayView(label: "Monday", foodItems: create_food_list())
+        tuesdayView = DayView(label: "Tuesday", foodItems: create_food_list())
+        wednesdayView = DayView(label: "Wednesday", foodItems: create_food_list())
+        thursdayView = DayView(label: "Thursday", foodItems: create_food_list())
+        fridayView = DayView(label: "Friday", foodItems: create_food_list())
         
-        mondayView.translatesAutoresizingMaskIntoConstraints = false
-        tuesdayView.translatesAutoresizingMaskIntoConstraints = false
-        wednesdayView.translatesAutoresizingMaskIntoConstraints = false
-        thursdayView.translatesAutoresizingMaskIntoConstraints = false
-        fridayView.translatesAutoresizingMaskIntoConstraints = false
+        mondayView?.translatesAutoresizingMaskIntoConstraints = false
+        tuesdayView?.translatesAutoresizingMaskIntoConstraints = false
+        wednesdayView?.translatesAutoresizingMaskIntoConstraints = false
+        thursdayView?.translatesAutoresizingMaskIntoConstraints = false
+        fridayView?.translatesAutoresizingMaskIntoConstraints = false
         
-        stackView.addArrangedSubview(mondayView)
-        stackView.addArrangedSubview(tuesdayView)
-        stackView.addArrangedSubview(wednesdayView)
-        stackView.addArrangedSubview(thursdayView)
-        stackView.addArrangedSubview(fridayView)
+        stackView.addArrangedSubview(mondayView!)
+        stackView.addArrangedSubview(tuesdayView!)
+        stackView.addArrangedSubview(wednesdayView!)
+        stackView.addArrangedSubview(thursdayView!)
+        stackView.addArrangedSubview(fridayView!)
         
         stackView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor).isActive = true
         stackView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor).isActive = true
         stackView.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
         stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
         
-        mondayView.heightAnchor.constraint(equalToConstant: 200).isActive = true
-        tuesdayView.heightAnchor.constraint(equalToConstant: 200).isActive = true
-        wednesdayView.heightAnchor.constraint(equalToConstant: 200).isActive = true
-        thursdayView.heightAnchor.constraint(equalToConstant: 200).isActive = true
-        fridayView.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        mondayView?.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        tuesdayView?.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        wednesdayView?.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        thursdayView?.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        fridayView?.heightAnchor.constraint(equalToConstant: 200).isActive = true
         
         let orderButton = UIButton()
         orderButton.backgroundColor = .red
         orderButton.translatesAutoresizingMaskIntoConstraints = false
         orderButton.layer.cornerRadius = 15
         orderButton.setTitle("Order", for: .normal)
+        orderButton.addTarget(self, action: #selector(orderFood), for: .touchUpInside)
         scrollView.addSubview(orderButton)
         
         NSLayoutConstraint.activate([
             orderButton.centerXAnchor.constraint(equalTo: view.layoutMarginsGuide.centerXAnchor),
-            //orderButton.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
             orderButton.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -20),
             orderButton.heightAnchor.constraint(equalToConstant: 40),
             orderButton.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor),
         ])
+        
+        
+        //var selectedValue = pickerViewContent[pickerView.selectedRowInComponent(0)]
+        
+        //let selectedValue: String = (mondayView?.foodPickerView?.selectedRow(inComponent: 0).description)!
+        
+        //print("SELECTED: \(selectedValue)")
+    }
+    
+    @objc func orderFood() {
+        let mondayValue: String = (mondayView?.foodPickerView?.selectedRow(inComponent: 0).description)!
+        let tuesdayValue: String = (tuesdayView?.foodPickerView?.selectedRow(inComponent: 0).description)!
+        let wednesdayValue: String = (wednesdayView?.foodPickerView?.selectedRow(inComponent: 0).description)!
+        let thursdayValue: String = (thursdayView?.foodPickerView?.selectedRow(inComponent: 0).description)!
+        let fridayValue: String = (fridayView?.foodPickerView?.selectedRow(inComponent: 0).description)!
+        
+        print("Food Items Selected:\n Monday: \(mondayValue)\n Tuesday: \(tuesdayValue)\n Wednesday: \(wednesdayValue)\n Thursday: \(thursdayValue)\n Friday: \(fridayValue)")
     }
 }
